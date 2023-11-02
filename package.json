@@ -12,22 +12,27 @@
     "build:esm:browser": "tsc --project tsconfig.browser.esm.json",
     "build:node": "npm run build:cjs:node && npm run build:esm:node",
     "build:browser": "npm run build:cjs:browser && npm run build:esm:browser",
-    "build": "npm run build:browser && npm run build:node"
+    "build": "npm run build:browser && npm run build:node",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run build"
   },
+  "files": [
+    "lib"
+  ],
   "exports": {
     "node": {
-      "import": "./lib/esm/index.js",
-      "require": "./lib/cjs/index.js",
-      "types": "./lib/esm/index.d.ts"
+      "import": "./lib/esm/node.js",
+      "require": "./lib/cjs/node.js",
+      "types": "./lib/esm/node.d.ts"
     },
     "browser": {
-      "import": "./lib/esm/index.js",
-      "require": "./lib/cjs/index.js",
-      "types": "./lib/esm/index.d.ts"
+      "import": "./lib/esm/browser.js",
+      "require": "./lib/cjs/browser.js",
+      "types": "./lib/esm/browser.d.ts"
     }
   },
-  "author": "",
-  "license": "ISC",
+  "author": "James Hay",
+  "license": "MIT",
   "devDependencies": {
     "@types/node": "^20.8.10",
     "@typescript-eslint/eslint-plugin": "^6.9.1",
@@ -35,5 +40,8 @@
     "eslint": "^8.52.0",
     "prettier": "^3.0.3",
     "typescript": "^5.2.2"
+  },
+  "directories": {
+    "lib": "lib"
   }
 }
