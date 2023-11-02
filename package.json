@@ -1,6 +1,6 @@
 {
   "name": "@flagpoonage/tools",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Tools that I use frequently",
   "main": "index.js",
   "type": "module",
@@ -20,12 +20,12 @@
     "lib"
   ],
   "exports": {
-    "node": {
+    "./node": {
       "import": "./lib/esm/node.js",
       "require": "./lib/cjs/node.js",
       "types": "./lib/esm/node.d.ts"
     },
-    "browser": {
+    "./browser": {
       "import": "./lib/esm/browser.js",
       "require": "./lib/cjs/browser.js",
       "types": "./lib/esm/browser.d.ts"
