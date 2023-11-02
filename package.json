@@ -1,8 +1,10 @@
 {
   "name": "@flagpoonage/tools",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Tools that I use frequently",
   "type": "module",
+  "main": "./lib/cjs/node.js",
+  "browser": "./lib/cjs/browser.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:cjs:node": "tsc --project tsconfig.node.cjs.json",
@@ -16,9 +18,12 @@
     "prepublishOnly": "npm run build"
   },
   "files": [
-    "lib"
+    "lib",
+    "LICENSE",
+    "README.md"
   ],
   "exports": {
+    "default": "./lib/esm/node.js",
     "./node": {
       "import": "./lib/esm/node.js",
       "require": "./lib/cjs/node.js",
