@@ -1,6 +1,6 @@
 {
   "name": "@flagpoonage/tools",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Tools that I use frequently",
   "main": "./lib/cjs/common.js",
   "browser": "./lib/cjs/common.js",
