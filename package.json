@@ -1,0 +1,39 @@
+{
+  "name": "@flagpoonage/tools",
+  "version": "1.0.0",
+  "description": "Tools that I use frequently",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:cjs:node": "tsc --project tsconfig.node.cjs.json",
+    "build:esm:node": "tsc --project tsconfig.node.esm.json",
+    "build:cjs:browser": "tsc --project tsconfig.browser.cjs.json",
+    "build:esm:browser": "tsc --project tsconfig.browser.esm.json",
+    "build:node": "npm run build:cjs:node && npm run build:esm:node",
+    "build:browser": "npm run build:cjs:browser && npm run build:esm:browser",
+    "build": "npm run build:browser && npm run build:node"
+  },
+  "exports": {
+    "node": {
+      "import": "./lib/esm/index.js",
+      "require": "./lib/cjs/index.js",
+      "types": "./lib/esm/index.d.ts"
+    },
+    "browser": {
+      "import": "./lib/esm/index.js",
+      "require": "./lib/cjs/index.js",
+      "types": "./lib/esm/index.d.ts"
+    }
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.8.10",
+    "@typescript-eslint/eslint-plugin": "^6.9.1",
+    "@typescript-eslint/parser": "^6.9.1",
+    "eslint": "^8.52.0",
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2"
+  }
+}
