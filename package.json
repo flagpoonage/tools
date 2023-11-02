@@ -2,18 +2,20 @@
   "name": "@flagpoonage/tools",
   "version": "1.0.3",
   "description": "Tools that I use frequently",
-  "type": "module",
-  "main": "./lib/cjs/node.js",
-  "browser": "./lib/cjs/browser.js",
+  "main": "./lib/cjs/common.js",
+  "browser": "./lib/cjs/common.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:cjs:node": "tsc --project tsconfig.node.cjs.json",
     "build:esm:node": "tsc --project tsconfig.node.esm.json",
     "build:cjs:browser": "tsc --project tsconfig.browser.cjs.json",
     "build:esm:browser": "tsc --project tsconfig.browser.esm.json",
+    "build:cjs:common": "tsc --project tsconfig.common.cjs.json",
+    "build:esm:common": "tsc --project tsconfig.common.esm.json",
     "build:node": "npm run build:cjs:node && npm run build:esm:node",
+    "build:common": "npm run build:cjs:common && npm run build:esm:common",
     "build:browser": "npm run build:cjs:browser && npm run build:esm:browser",
-    "build": "npm run build:browser && npm run build:node",
+    "build": "npm run build:common && npm run build:browser && npm run build:node",
     "prepare": "npm run build",
     "prepublishOnly": "npm run build"
   },
@@ -23,7 +25,15 @@
     "README.md"
   ],
   "exports": {
-    "default": "./lib/esm/node.js",
+    ".": [
+      {
+        "import": "./lib/esm/common.js",
+        "require": "./lib/cjs/common.js",
+        "default": "./lib/cjs/common.js",
+        "types": "./lib/cjs/common.d.ts"
+      },
+      "./lib/cjs/common.js"
+    ],
     "./node": {
       "import": "./lib/esm/node.js",
       "require": "./lib/cjs/node.js",

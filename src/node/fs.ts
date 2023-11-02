@@ -1,5 +1,6 @@
 import { readFile } from 'fs/promises';
-import { asFailable, safeParseJson } from '../common/index.js';
+import { asFailable } from '../common/failable';
+import { safeParseJson } from '../common/safe';
 
 export async function safeReadFile(path: string) {
   return asFailable(() => readFile(path, 'utf-8'));
