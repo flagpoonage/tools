@@ -1,8 +1,7 @@
 {
   "name": "@flagpoonage/tools",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Tools that I use frequently",
-  "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
