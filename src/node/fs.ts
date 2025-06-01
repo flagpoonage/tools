@@ -1,13 +1,14 @@
-import { readFile } from 'fs/promises';
+import type { PathLike } from 'fs';
+import { type FileHandle, readFile } from 'fs/promises';
 import { createResultAsync } from '../common/result';
 import { safeParseJson } from '../common/safe';
 
-export async function safeReadFile(path: string) {
+export async function safeReadUtf8File(path: PathLike | FileHandle) {
   return createResultAsync(() => readFile(path, 'utf-8'));
 }
 
-export async function safeReadJsonFile(path: string) {
-  const file = await safeReadFile(path);
+export async function safeReadJsonFile(path: PathLike | FileHandle) {
+  const file = await safeReadUtf8File(path);
   if (!file.success) {
     return file;
   }
