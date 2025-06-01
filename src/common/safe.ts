@@ -1,9 +1,9 @@
-import { FailableResult, asSyncFailable } from "./failable";
+import { Result, createResult } from './result';
 
-export function safeParseJson(value: string): FailableResult<unknown> {
-  return asSyncFailable(() => JSON.parse(value));
+export function safeParseJson(value: string): Result<unknown> {
+  return createResult(() => JSON.parse(value));
 }
 
-export function safeParseURL(value: string): FailableResult<URL> {
-  return asSyncFailable(() => new URL(value));
+export function safeParseURL(value: string): Result<URL> {
+  return createResult(() => new URL(value));
 }

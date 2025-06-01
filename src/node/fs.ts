@@ -1,9 +1,9 @@
 import { readFile } from 'fs/promises';
-import { asFailable } from '../common/failable';
+import { createResultAsync } from '../common/result';
 import { safeParseJson } from '../common/safe';
 
 export async function safeReadFile(path: string) {
-  return asFailable(() => readFile(path, 'utf-8'));
+  return createResultAsync(() => readFile(path, 'utf-8'));
 }
 
 export async function safeReadJsonFile(path: string) {

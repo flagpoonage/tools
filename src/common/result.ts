@@ -1,35 +1,33 @@
 import { isObject } from './is.js';
 
-export interface FailableSuccess<T> {
+export interface ResultSuccess<T> {
   success: true;
   value: T;
 }
 
-export interface FailableError<T = unknown> {
+export interface ResultError<T = unknown> {
   success: false;
   error: T;
 }
 
-export type FailableResult<T, E = unknown> =
-  | FailableSuccess<T>
-  | FailableError<E>;
-export type Failable<T, E = unknown> = Promise<FailableResult<T, E>>;
+export type Result<T, E = unknown> = ResultSuccess<T> | ResultError<E>;
+export type ResultPromise<T, E = unknown> = Promise<Result<T, E>>;
 
-export function createErrorResult<E = unknown>(error: E): FailableError<E> {
+export function createErrorResult<E = unknown>(error: E): ResultError<E> {
   return {
     success: false,
     error,
   };
 }
 
-export function createSuccessResult<T = unknown>(value: T): FailableSuccess<T> {
+export function createSuccessResult<T = unknown>(value: T): ResultSuccess<T> {
   return {
     success: true,
     value,
   };
 }
 
-export function asSyncFailable<T = unknown>(fn: () => T): FailableResult<T> {
+export function createResult<T = unknown>(fn: () => T): Result<T> {
   try {
     const result = fn();
     return createSuccessResult(result);
@@ -38,9 +36,9 @@ export function asSyncFailable<T = unknown>(fn: () => T): FailableResult<T> {
   }
 }
 
-export async function asFailable<T = unknown>(
+export async function createResultAsync<T = unknown>(
   fn: () => T | Promise<T>,
-): Failable<T> {
+): ResultPromise<T> {
   try {
     const result = await fn();
     return createSuccessResult(result);
@@ -49,9 +47,7 @@ export async function asFailable<T = unknown>(
   }
 }
 
-export function isFailableResult(
-  value: unknown,
-): value is FailableResult<unknown> {
+export function isResultType(value: unknown): value is Result<unknown> {
   return (
     isObject(value) &&
     typeof value.success === 'boolean' &&
